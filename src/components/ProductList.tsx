@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Grid, Card, CardContent, CardMedia, Typography } from '@mui/material';
 
+
+// define an interface Product with the properties of the products we want to render.
 interface Product {
   id: number;
   title: string;
@@ -12,13 +14,14 @@ interface Product {
 }
 
 function ProductList() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);  // useState is used to initialize two state variables: products and isPending
   const [isPending, setIsPending] = useState(true);
 
+  //useEffect is used to fetch the data from the API and update the state variables products and isPending. The useEffect hook runs only once when the component mounts because an empty array is passed as the second argument.
   useEffect(() => {
     const API = "https://fakestoreapi.com/products";
     fetch(API)
-      .then((res) => res.json())
+      .then((res) => res.json()) // / line converts response to JSON format and the following line .then data, handles the json data
       .then(data => {
         console.log(data);
         setProducts(data);
@@ -77,3 +80,12 @@ function ProductList() {
 }
 
 export default ProductList;
+
+
+// The condition is that "products" should exist and its length should be greater than 0. 
+// If this condition is true, then the list of products is rendered using the "map" method, 
+// which loops through each item in the "products" array and creates a new element for it based
+// on the JSX code provided.
+
+// The "map" method takes two arguments: the first is the current item being iterated over
+// (in this case, called "item"), and the second is the index of that item in the array (called "index"). 

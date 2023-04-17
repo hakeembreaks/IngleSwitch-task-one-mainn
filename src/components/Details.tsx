@@ -21,16 +21,16 @@ type Product = {
 
 const Details = () => {
   const { id } = useParams(); // useParams hook is used to get the id parameter from the URL.
-  const [product, setProduct] = useState<Product | null>(null); // 
+  const [product, setProduct] = useState<Product | null>(null); // TypeScript type definition. It indicates that the product state variable can hold either a value of type Product  or null
   const navigate = useNavigate();
   
 
   useEffect(() => {
-    const API = "https://fakestoreapi.com/products/" +id;
+    const API = "https://fakestoreapi.com/products/" +id; 
     fetch(API)
       .then((response) => response.json())
       .then((data) => setProduct(data));
-  }, [id]);
+  }, [id]); // This ensures that the effect is only run when the id value changes, preventing unnecessary re-renders.
 
   const handleGoBack = () => {
     navigate('/');
